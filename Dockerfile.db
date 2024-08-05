@@ -1,0 +1,10 @@
+# Use the official PostgreSQL base image
+FROM postgres:alpine
+
+# Set environment variables
+ENV POSTGRES_USER=shumukh \
+    POSTGRES_PASSWORD=SH1234 \
+    POSTGRES_DB=sh_db
+
+# Expose PostgreSQL port
+EXPOSE 5432

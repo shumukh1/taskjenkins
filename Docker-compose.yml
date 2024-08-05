@@ -1,0 +1,40 @@
+version: '3'
+services:
+  postgresql:
+    image: 'postgres:alpine'
+    container_name: postgresql
+    environment:
+      - POSTGRES_USER=shumukh
+      - POSTGRES_PASSWORD=SH1234
+      - POSTGRES_DB=sh_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+ 
+  backend:
+    build:
+      context: ./multi-tier-tasks/backend
+      dockerfile: Dockerfile
+    depends_on:
+      - postgresql
+    env_file: "./multi-tier-tasks/backend/.env"
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./multi-tier-tasks/frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    
+    ports:
+      - "80:80"
+ 
+volumes:
+  postgres-data:
+ 
+networks:
+  default:
+    name: my-network
