@@ -41,7 +41,7 @@
 
     <script>
         function loadRows() {
-            fetch('http://localhost:8080/rows')
+            fetch('http://shalabed-backend-service.playground.svc.cluster.local:8080/rows')
                 .then(response => response.json())
                 .then(data => {
                     const tbody = document.querySelector('#rowsTable tbody');
